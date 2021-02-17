@@ -12,20 +12,21 @@ startApp();
 /* Starts the banking app. */
 function startApp() {
   let running = true;
+  let balance = 0;
 
   while(running) {
-    const input = prompt('Enter a command (\'W\', \'D\', \'B\', \'Q\')');
+    const input = prompt('Enter a command (\'W\', \'D\', \'B\', \'Q\').');
     const sanitizedInput = sanitize(input);
 
     switch (sanitizedInput) {
       case 'W':
-        withdraw();
+        balance = withdrawalFlow(balance);
         break;
       case 'D':
-        deposit();
+        balance = depositFlow(balance);
         break;
       case 'B':
-        balance();
+        balanceFlow(balance);
         break;
       case 'Q':
         alert('Have a nice day!');
@@ -51,17 +52,22 @@ function sanitize(input) {
 }
 
 /* Handle the flow for a withdrawal. */
-function withdraw() {
+function withdrawalFlow() {
   alert('withdrawal flow');
 }
 
 /* Handle the flow for a deposit. */
-function deposit() {
-  alert('deposit flow');
+function depositFlow(currentBalance) {
+  const depositAmountRaw = prompt('Enter an amount to deposit.');
+  const depositAmount = Number(depositAmountRaw);
+  const newBalance = currentBalance + depositAmount;
+
+  alert("Transaction successful.");
+  return newBalance;
 }
 
 /* Handle the flow for a balance check. */
-function balance() {
+function balanceFlow(balance) {
   alert('balance flow');
 }
 
