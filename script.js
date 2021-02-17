@@ -52,8 +52,13 @@ function sanitize(input) {
 }
 
 /* Handle the flow for a withdrawal. */
-function withdrawalFlow() {
-  alert('withdrawal flow');
+function withdrawalFlow(currentBalance) {
+  const withdrawalAmountRaw = prompt('Enter an amount to withdraw.');
+  const withdrawalAmount = Number(withdrawalAmountRaw);
+  const newBalance = currentBalance - withdrawalAmount;
+
+  alert('Transaction successful');
+  return newBalance;
 }
 
 /* Handle the flow for a deposit. */
