@@ -68,7 +68,7 @@ function depositFlow(currentBalance) {
 
 /* Handle the flow for a balance check. */
 function balanceFlow(balance) {
-  alert('balance flow');
+  alert('Current balance: ' + balance);
 }
 
 /* Handle the case of an unknown command. */
