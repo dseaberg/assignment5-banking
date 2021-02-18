@@ -57,23 +57,49 @@ function withdrawalFlow(currentBalance) {
   const withdrawalAmount = Number(withdrawalAmountRaw);
   const newBalance = currentBalance - withdrawalAmount;
 
-  alert('Transaction successful');
-  return newBalance;
+  if (newBalance < 0) {
+    alert('Transaction failed: insufficient funds');
+    return currentBalance;
+  } else if (newBalance < 300) {
+    const confirmationRaw = prompt('Transaction will reduce balance to below $300. Are you sure? (\'Y\' or \'N\').');
+    const confirmation = sanitize(confirmationRaw);
+
+    if (confirmation === 'Y') {
+      alert('Transaction successful');
+      return newBalance;
+    } else {
+      alert('Transaction canceled');
+      return currentBalance;
+    }
+
+  } else {
+    alert('Transaction successful');
+    return newBalance;
+  }
 }
 
 /* Handle the flow for a deposit. */
 function depositFlow(currentBalance) {
   const depositAmountRaw = prompt('Enter an amount to deposit.');
   const depositAmount = Number(depositAmountRaw);
-  const newBalance = currentBalance + depositAmount;
 
-  alert("Transaction successful.");
-  return newBalance;
+  if (depositAmount > 50000) {
+    alert('Transaction failed: cannot deposit greater than $50,000');
+    return currentBalance;
+  } else {
+    const newBalance = currentBalance + depositAmount;
+    alert("Transaction successful.");
+    return newBalance;
+  }
 }
 
 /* Handle the flow for a balance check. */
 function balanceFlow(balance) {
-  alert('Current balance: ' + balance);
+  if (balance < 100) {
+    alert('WARNING: low balance\nCurrent balance: ' + balance);
+  } else {
+    alert('Current balance: ' + balance);
+  }
 }
 
 /* Handle the case of an unknown command. */
